@@ -27,3 +27,9 @@ il/videos/
 # run logs (training/eval/gen stdout captured to files)
 *.log
 
+# secrets — NEVER commit Kaggle / cloud credentials
+Kaggle API Credentials.json
+kaggle.json
+*.kaggle
+.kaggle/
+
