@@ -10,6 +10,10 @@ flags:
   obs_camera: scene
   visual_encoder: resnet18
   num_kp: 32
+  # DrQ-style random image-shift aug: improves generalisation to the held-out wider position
+  # randomisation. Training-only + parameter-free, so the checkpoint/eval contract is unchanged.
+  image_aug: true
+  aug_pad: 4
   total_iters: 30000
   batch_size: 128
   obs_horizon: 2
