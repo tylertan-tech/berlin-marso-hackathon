@@ -11,7 +11,9 @@ defaults:
 env_id: WarehouseSort-v1
 control_mode: pd_ee_delta_pos
 sim_backend: gpu
-max_episode_steps: 200
+# Keep this aligned with conf/config.yaml (the judge's budget) so the in-training eval that
+# selects best_eval_sort_accuracy reflects how the policy is actually scored.
+max_episode_steps: 400
 demo_dir: easy                  # which il/demos/<dir> dataset to train on
 demo_path: null                 # null -> auto (state/rgb dataset chosen by method.demo_kind)
 

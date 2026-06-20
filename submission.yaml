@@ -1,0 +1,22 @@
+# Submission manifest — read by the judge to run the held-out eval per level.
+#
+# We train one RGB Diffusion Policy per level (on that level's 200 provided demos) and point
+# each level at its own checkpoint. The rgb observation has a fixed shape at every difficulty,
+# so a single generalist checkpoint could serve all three — but per-level specialisation is
+# simpler to train and aligns each policy with its own distribution.
+#
+# The entrypoint warehouse_sort.il_policy:load_dp_rgb uses defaults that MATCH the training
+# config in il/conf/method/dp_rgb.yaml (obs_horizon=2, act_horizon=8, pred_horizon=16,
+# resnet18 + num_kp=32), so no extra loader args are needed.
+
+team: "CHANGE-ME"
+
+policy: warehouse_sort.il_policy:load_dp_rgb
+
+levels:
+  easy:
+    checkpoint: il/baselines/diffusion_policy/runs/warehouse_rgb_dp_easy/checkpoints/best_eval_sort_accuracy.pt
+  medium:
+    checkpoint: il/baselines/diffusion_policy/runs/warehouse_rgb_dp_medium/checkpoints/best_eval_sort_accuracy.pt
+  hard:
+    checkpoint: il/baselines/diffusion_policy/runs/warehouse_rgb_dp_hard/checkpoints/best_eval_sort_accuracy.pt

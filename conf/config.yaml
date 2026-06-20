@@ -8,7 +8,11 @@ seed: 0
 num_envs: 8               # for eval/test; scale up as GPU allows
 device: cuda
 control_mode: pd_ee_delta_pos
-max_episode_steps: 200
+# The scripted demos need ~57 steps/parcel, so sorting all 6 hard parcels takes ~345 steps.
+# eval_config never overrides this, and in env.evaluate() a correct placement LATCHES
+# (self._placed_correct |= ...), so a longer budget can only raise sort_accuracy, never
+# lower it. 400 gives medium/hard enough time to finish while keeping judging fast.
+max_episode_steps: 400
 
 # observation mode. This is an IMAGE challenge: the observation is the scene-camera rgb image
 # plus robot proprioception. Defaults to rgb for every difficulty.
